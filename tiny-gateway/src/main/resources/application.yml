@@ -1,0 +1,43 @@
+spring:
+  profiles:
+    active:
+    - common
+    
+    
+---
+
+
+spring:
+  config:
+    activate:
+      on-profile:
+      - common
+
+
+  cloud:
+    gateway:
+      routes:
+      - id: tiny-user
+        uri: http://localhost:8081/v1/tiny/user
+        predicates:
+        - Path=/v1/tiny/user
+        - Method=GET,POST,DELETE
+      - id: tiny-url
+        uri: http://localhost:8082/v1/tiny/url
+        predicates:
+        - Path=/v1/tiny/url
+        - Method=GET,POST,DELETE        
+        
+  application:
+    name: tiny-gateway
+    
+logging:
+  level:
+    org:
+      springframework:
+        cloud.gateway: DEBUG
+        http.server.reactive: DEBUG
+        web.reactive: DEBUG
+        
+server:
+  port: 80        

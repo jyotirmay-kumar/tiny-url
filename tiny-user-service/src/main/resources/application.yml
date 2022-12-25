@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active:
+    - common
+    
+    
+---
+
+server:
+  port: 8081
+spring:
+  config:
+    activate:
+      on-profile:
+      - common
+      
+  datasource:
+    url: ${datasource-url}
+    username: ${datasource-username}
+    password: ${datasource-password}
+    
+application:
+  key-generator:
+    delta: ${key-generator-delta}
+  api-key:
+    size: ${api-key-size}
+  tiny-url:
+    length: ${tiny-url-length}
+    
+    
+logging:
+  level:
+    '[org.springframework]' : ERROR

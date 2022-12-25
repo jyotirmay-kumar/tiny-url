@@ -21,3 +21,19 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+tiny-url-service/target
+tiny-url-service/bin
+
+tiny-user-service/target
+tiny-user-service/bin
+
+tiny-gateway/target
+tiny-gateway/bin
+
+tiny-config-server/target
+tiny-config-server/bin
+
+tiny-discovery-server/target
+tiny-discovery-server/bin
+/.project
