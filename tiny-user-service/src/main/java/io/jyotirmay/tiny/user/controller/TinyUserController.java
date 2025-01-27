@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.jyotirmay.tiny.user.entity.TinyUserEntity;
-import io.jyotirmay.tiny.user.exception.TinyUserException;
+import io.jyotirmay.tiny.user.exception.TinyClientException;
 import io.jyotirmay.tiny.user.model.TinyUser;
 import io.jyotirmay.tiny.user.service.TinyUserService;
 import io.jyotirmay.tiny.user.util.TinyUtil;
@@ -27,9 +27,10 @@ public class TinyUserController {
 	public ResponseEntity<TinyUserEntity> registerUser(@RequestBody String requestString) {
 
 		TinyUser tinyUser = TinyUtil.parseTinyUser(requestString);
-		log.info("Request received to register a user:: {}", tinyUser.getName());
+		log.info("Request received to register a user:: {} {}", tinyUser.getFistName(), tinyUser.getLastName());
 		TinyUserEntity tinyUserEntity = tinyUserService.addUser(tinyUser);
-		log.info("Registered user {} with id: {}", tinyUserEntity.getName(), tinyUserEntity.getUserId());
+		log.info("Registered user {} {} with id: {}", tinyUser.getFistName(), tinyUser.getLastName(),
+				tinyUserEntity.getUserId());
 		return new ResponseEntity<TinyUserEntity>(tinyUserEntity, HttpStatus.CREATED);
 	}
 
@@ -42,7 +43,7 @@ public class TinyUserController {
 			tinyUserService.deleteUser(userUUID);
 			log.info("User {} successfully unregistered.", userUUID);
 		} catch (IllegalArgumentException e) {
-			throw new TinyUserException("Incorrect username.");
+			throw new TinyClientException("Incorrect username.");
 		}
 	}
 }

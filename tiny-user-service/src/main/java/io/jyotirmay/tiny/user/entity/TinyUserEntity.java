@@ -19,7 +19,9 @@ public class TinyUserEntity {
 	@Id
 	private UUID userId;
 
-	private String name;
+	private String fistName;
+
+	private String lastName;
 
 	private String emailId;
 
